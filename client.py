@@ -1,31 +1,22 @@
-# sys gets the name of operating system
+from networking import Server, WebHandler, AppHandler
+import asyncore
 import sys
-# os performs the functions on the system
-import os
-import platform
-import socket
 import thread
 
-WINDOWS = "win"
-ADDRESS = ("localhost", 8888)
-BUFFER_SIZE = 4096
-OSX = "darwin"
+HOST, PORT = 'localhost', 8888
+
+class Client(AppHandler):
+    def on_msg(self, msg):
+        print msg
         
-s = socket.socket()
-s.connect(ADDRESS)
-s.send("!name!"+platform.node())
-osName = sys.platform
-computerName = platform.node()
-print computerName
-while True:
-    received = s.recv(BUFFER_SIZE)
-    if (osName.startswith(WINDOWS)):
-        pass
-    elif (OSX in osName.lower()):
-        print received
-    else:
-        pass
+def getText():
+    while 1:
+        mytxt = raw_input("Text: ")
+        client.push(client.encode(mytxt) + '\0')
         
-        
-    
-s.close()
+
+client = Client(HOST, PORT)
+thread.start_new_thread(getText, ())
+
+asyncore.loop()
+

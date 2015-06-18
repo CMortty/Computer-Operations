@@ -1,0 +1,29 @@
+$def with (greeting)
+
+<html>
+    <head>
+        <title>Gothons Of Planet Percal #25</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
+<body>
+    
+    <div class="row">
+        <div class="col-xs-4">
+            Test1
+        </div>
+        <div class="col-xs-8">
+            Test2
+        </div>
+    </div>
+
+$if greeting:
+    I just wanted to say <em style="color: green; font-size: 2em;">$greeting</em>.
+$else:
+    <em>Hello</em>, world!
+    
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

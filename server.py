@@ -1,26 +1,19 @@
-import socket
+from networking import Server, WebHandler, AppHandler
 import thread
+import asyncore
 
-BUFFER_SIZE = 4096
-ADDRESS = ("localhost", 8888)
-BACKLOG = 100
-NAME_KEYWORD = "!name!"
-connections = {} # Make a name: connection dictionary
+HOST_APP, PORT_APP = 'localhost', 8888
+HOST_WEB, PORT_WEB = 'localhost', 8888
 
-def serve(connectionSocket, addr):
-    while True:
-        message = connectionSocket.recv(BUFFER_SIZE)
-        if (NAME_KEYWORD in message):
-            name = message.split(NAME_KEYWORD)
-            connections[name[1]] = connectionSocket
-            print connections
-        print message
+class AHandler(AppHandler):
+    def on_msg(self, msg):
+        print msg
+        mytxt = raw_input("Text: ")
+        self.push(self.encode(mytxt) + '\0')
+        
+webServer = Server(HOST_WEB, PORT_WEB, WebHandler)
+appServer = Server(HOST_APP, PORT_APP, AHandler)
 
-s = socket.socket()
-s.bind(ADDRESS)
-s.listen(BACKLOG)
-print "Waiting for connections..."
-while True:
-    connectionSocket, addr = s.accept()
-    thread.start_new_thread( serve, (connectionSocket, addr))
-s.close()
+asyncore.loop()
+
+    
