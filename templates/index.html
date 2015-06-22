@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>This is only a test</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    Test
+                </div>
+            </div>
+            <div class="row">
+                {% for key, values in data.items %}
+                    <div class="col-xs-12">
+                        {{key}}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    </body>
+</html>

@@ -18,7 +18,7 @@ class WebHandler(asynchat.async_chat):
         self.buff.append(data)
     
     def found_terminator(self):
-        self.push("<html><body>Test</body></html>")
+        self.on_msg("")
         self.close()
 
     def encode(self, msg):
@@ -28,6 +28,9 @@ class WebHandler(asynchat.async_chat):
     def decode(self, msg):
         # return base64.b64decode(zlib.decompress(msg))
         return json.loads(msg)
+    
+    def on_msg(self, msg):
+        pass
 
         
 class AppHandler(asynchat.async_chat):
